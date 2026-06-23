@@ -1,0 +1,422 @@
+// Version: 1.0.0
+type ActivityEntry__219629378 = ActivityEntry__497453047;
+type ActivityEntry__497453047 =
+  {
+    action : Text;
+    description : Text;
+    id : Nat;
+    moduleName : Text;
+    timestamp : Int;
+    userId : Text
+  };
+type AuthUser__864115013 =
+  {
+    avatarColor : Text;
+    createdAt : ?Int;
+    department : Text;
+    email : Text;
+    id : Nat;
+    lastLogin : ?Int;
+    name : Text;
+    principal : ?Principal;
+    role : {#admin; #guest; #member; #owner};
+    title : Text
+  };
+type CalendarEvent__205613815 =
+  {
+    allDay : Bool;
+    calendarId : Nat;
+    color : Text;
+    description : Text;
+    endTime : Int;
+    id : Nat;
+    startTime : Int;
+    title : Text
+  };
+type CalendarEvent__338831297 = CalendarEvent__205613815;
+type Calendar__366658620 =
+  {color : Text; id : Nat; name : Text; visible : Bool};
+type Calendar__418544742 = Calendar__366658620;
+type CellKey__983720988 = Nat;
+type Channel__344246605 = Channel__662979216;
+type Channel__662979216 =
+  {
+    createdAt : Timestamp__301639476;
+    id : Nat;
+    name : Text;
+    topic : Text;
+    workspaceId : Nat
+  };
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type DirectMessage__207624701 = DirectMessage__504631064;
+type DirectMessage__504631064 =
+  {
+    content : Text;
+    createdAt : Timestamp__301639476;
+    fromUserId : UserId__158757552;
+    id : Nat;
+    toUserId : UserId__158757552
+  };
+type Document__57377506 =
+  {
+    authorId : UserId__158757552;
+    content : Text;
+    createdAt : Timestamp__301639476;
+    folderId : ?Nat;
+    id : Nat;
+    title : Text;
+    updatedAt : Timestamp__301639476;
+    workspaceId : Nat
+  };
+type Document__815549472 = Document__57377506;
+type Folder__698738842 = Folder__922158;
+type Folder__922158 =
+  {id : Nat; name : Text; parentId : ?Nat; workspaceId : Nat};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type Map__158565046<K, V> = Map__297112838<K, V>;
+type Map__297112838<K, V> =
+  {var root : Node__46230540<K, V>; var size : Nat__490723111};
+type Map__605269027<K, V> = Map__158565046<K, V>;
+type Message__242275943 = Message__454780518;
+type Message__454780518 =
+  {
+    authorId : UserId__158757552;
+    channelId : Nat;
+    content : Text;
+    createdAt : Timestamp__301639476;
+    id : Nat
+  };
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type NoteFolder__320373887 = NoteFolder__706756924;
+type NoteFolder__706756924 = {createdAt : Int; id : Nat; name : Text};
+type Note__1063160515 =
+  {
+    content : Text;
+    createdAt : Int;
+    folderId : ?Nat;
+    id : Nat;
+    title : Text;
+    updatedAt : Int
+  };
+type Note__641183515 = Note__1063160515;
+type Notification__264708741 =
+  {
+    body : Text;
+    createdAt : Timestamp__301639476;
+    id : Nat;
+    isRead : Bool;
+    notifType : {#activity; #mention; #update};
+    sourceId : ?Nat;
+    sourceType : ?Text;
+    title : Text;
+    userId : UserId__158757552
+  };
+type Notification__797358294 = Notification__264708741;
+type Person__508203434 =
+  {
+    avatarInitials : Text;
+    createdAt : Int;
+    department : Text;
+    email : Text;
+    id : Nat;
+    name : Text;
+    role : Text;
+    status : Text
+  };
+type Person__550601195 = Person__508203434;
+type Presentation__154163956 =
+  {createdAt : Int; id : Nat; title : Text; updatedAt : Int};
+type Presentation__262206067 = Presentation__154163956;
+type ProjectMilestone__141809187 =
+  {completed : Bool; dueDate : ?Int; id : Nat; projectId : Nat; title : Text};
+type ProjectMilestone__478722750 = ProjectMilestone__141809187;
+type Project__255428090 = Project__614212307;
+type Project__614212307 =
+  {
+    color : Text;
+    createdAt : Int;
+    description : Text;
+    id : Nat;
+    name : Text;
+    ownerId : Text;
+    status : Text;
+    updatedAt : Int
+  };
+type SheetCell__22120630 =
+  {col : Nat; row : Nat; sheetId : Nat; value : Text};
+type SheetCell__431875677 = SheetCell__22120630;
+type Sheet__432898704 =
+  {createdAt : Int; id : Nat; name : Text; updatedAt : Int};
+type Sheet__701822424 = Sheet__432898704;
+type Slide__1069895626 = Slide__11900119;
+type Slide__11900119 =
+  {
+    content : Text;
+    id : Nat;
+    position : Nat;
+    presentationId : Nat;
+    title : Text;
+    visualType : Text
+  };
+type TaskList__565643349 = TaskList__615398063;
+type TaskList__615398063 =
+  {
+    id : Nat;
+    isPersonal : Bool;
+    name : Text;
+    projectId : ?Nat;
+    workspaceId : Nat
+  };
+type TaskPriority__853325093 = {#high; #low; #normal; #urgent};
+type TaskStatus__843367325 = {#blocked; #done; #inProgress; #todo};
+type Task__1024681722 = Task__431803600;
+type Task__431803600 =
+  {
+    assigneeIds : [UserId__158757552];
+    createdAt : Timestamp__301639476;
+    description : Text;
+    dueDate : ?Timestamp__301639476;
+    id : Nat;
+    listId : Nat;
+    priority : TaskPriority__853325093;
+    projectId : ?Nat;
+    status : TaskStatus__843367325;
+    tags : [Text];
+    title : Text
+  };
+type Timestamp__301639476 = Int;
+type UserId__158757552 = Nat;
+type UserSettings__412091940 = UserSettings__451559232;
+type UserSettings__451559232 =
+  {
+    displayName : Text;
+    email : Text;
+    notificationsEnabled : Bool;
+    theme : Text
+  };
+type User__802759839 =
+  {
+    avatarColor : Text;
+    department : Text;
+    email : Text;
+    id : UserId__158757552;
+    name : Text;
+    role : {#admin; #guest; #member; #owner};
+    title : Text
+  };
+type WorkspaceSettings__393883147 = {description : Text; name : Text};
+type WorkspaceSettings__600769483 = WorkspaceSettings__393883147;
+type Workspace__405571195 =
+  {
+    createdAt : Timestamp__301639476;
+    id : Nat;
+    memberIds : [UserId__158757552];
+    name : Text;
+    ownerId : UserId__158757552
+  };
+actor {
+  stable _activityCounters : {var nextId : Nat};
+  stable _activityEntries :
+    {
+      var root : Node__46230540<Nat, ActivityEntry__497453047>;
+      var size : Nat__490723111
+    };
+  stable _activityState :
+    {
+      counters : {var nextId : Nat};
+      entries : Map__605269027<Nat, ActivityEntry__219629378>
+    };
+  stable _authState : {var inviteCode : Text; var nextUserId : Nat};
+  stable _authUsers :
+    {
+      var root : Node__46230540<Principal, AuthUser__864115013>;
+      var size : Nat__490723111
+    };
+  stable _calCounters : {var nextCalId : Nat; var nextEventId : Nat};
+  stable _calEvents :
+    {
+      var root : Node__46230540<Nat, CalendarEvent__205613815>;
+      var size : Nat__490723111
+    };
+  stable _calState :
+    {
+      calendars : Map__605269027<Nat, Calendar__418544742>;
+      counters : {var nextCalId : Nat; var nextEventId : Nat};
+      events : Map__605269027<Nat, CalendarEvent__338831297>
+    };
+  stable _calendars :
+    {
+      var root : Node__46230540<Nat, Calendar__366658620>;
+      var size : Nat__490723111
+    };
+  stable _chatChannels :
+    {
+      var root : Node__46230540<Nat, Channel__662979216>;
+      var size : Nat__490723111
+    };
+  stable _chatCounters :
+    {var nextChannelId : Nat; var nextDmId : Nat; var nextMessageId : Nat};
+  stable _chatDms :
+    {
+      var root : Node__46230540<Nat, DirectMessage__504631064>;
+      var size : Nat__490723111
+    };
+  stable _chatMessages :
+    {
+      var root : Node__46230540<Nat, Message__454780518>;
+      var size : Nat__490723111
+    };
+  stable _chatState :
+    {
+      channels : Map__605269027<Nat, Channel__344246605>;
+      counters :
+        {
+          var nextChannelId : Nat;
+          var nextDmId : Nat;
+          var nextMessageId : Nat
+        };
+      directMessages : Map__605269027<Nat, DirectMessage__207624701>;
+      messages : Map__605269027<Nat, Message__242275943>
+    };
+  stable _docCounters : {var nextDocId : Nat; var nextFolderId : Nat};
+  stable _docDocuments :
+    {
+      var root : Node__46230540<Nat, Document__57377506>;
+      var size : Nat__490723111
+    };
+  stable _docFolders :
+    {
+      var root : Node__46230540<Nat, Folder__922158>;
+      var size : Nat__490723111
+    };
+  stable _docState :
+    {
+      counters : {var nextDocId : Nat; var nextFolderId : Nat};
+      documents : Map__605269027<Nat, Document__815549472>;
+      folders : Map__605269027<Nat, Folder__698738842>
+    };
+  stable _milestones :
+    {
+      var root : Node__46230540<Nat, ProjectMilestone__141809187>;
+      var size : Nat__490723111
+    };
+  stable _noteCounters : {var nextFolderId : Nat; var nextNoteId : Nat};
+  stable _noteFolders :
+    {
+      var root : Node__46230540<Nat, NoteFolder__706756924>;
+      var size : Nat__490723111
+    };
+  stable _noteState :
+    {
+      counters : {var nextFolderId : Nat; var nextNoteId : Nat};
+      folders : Map__605269027<Nat, NoteFolder__320373887>;
+      notes : Map__605269027<Nat, Note__641183515>
+    };
+  stable _notes :
+    {
+      var root : Node__46230540<Nat, Note__1063160515>;
+      var size : Nat__490723111
+    };
+  stable _notifCounters : {var nextNotifId : Nat};
+  stable _notifState :
+    {
+      counters : {var nextNotifId : Nat};
+      notifications : Map__605269027<Nat, Notification__797358294>
+    };
+  stable _notifs :
+    {
+      var root : Node__46230540<Nat, Notification__264708741>;
+      var size : Nat__490723111
+    };
+  stable _people :
+    {
+      var root : Node__46230540<Nat, Person__508203434>;
+      var size : Nat__490723111
+    };
+  stable _peopleCounters : {var nextId : Nat};
+  stable _peopleState :
+    {
+      counters : {var nextId : Nat};
+      people : Map__605269027<Nat, Person__550601195>
+    };
+  stable _presCounters : {var nextPresId : Nat; var nextSlideId : Nat};
+  stable _presState :
+    {
+      counters : {var nextPresId : Nat; var nextSlideId : Nat};
+      presentations : Map__605269027<Nat, Presentation__262206067>;
+      slides : Map__605269027<Nat, Slide__1069895626>
+    };
+  stable _presentations :
+    {
+      var root : Node__46230540<Nat, Presentation__154163956>;
+      var size : Nat__490723111
+    };
+  stable _projCounters : {var nextMilestoneId : Nat; var nextProjectId : Nat};
+  stable _projState :
+    {
+      counters : {var nextMilestoneId : Nat; var nextProjectId : Nat};
+      milestones : Map__605269027<Nat, ProjectMilestone__478722750>;
+      projects : Map__605269027<Nat, Project__255428090>
+    };
+  stable _projects :
+    {
+      var root : Node__46230540<Nat, Project__614212307>;
+      var size : Nat__490723111
+    };
+  stable _settingsState :
+    {
+      user : {var settings : UserSettings__412091940};
+      workspace : {var settings : WorkspaceSettings__600769483}
+    };
+  stable _sheetCells :
+    {
+      var root : Node__46230540<CellKey__983720988, SheetCell__22120630>;
+      var size : Nat__490723111
+    };
+  stable _sheetCounters : {var nextSheetId : Nat};
+  stable _sheetState :
+    {
+      cells : Map__605269027<CellKey__983720988, SheetCell__431875677>;
+      counters : {var nextSheetId : Nat};
+      sheets : Map__605269027<Nat, Sheet__701822424>
+    };
+  stable _sheets :
+    {
+      var root : Node__46230540<Nat, Sheet__432898704>;
+      var size : Nat__490723111
+    };
+  stable _slides :
+    {
+      var root : Node__46230540<Nat, Slide__11900119>;
+      var size : Nat__490723111
+    };
+  stable _taskCounters : {var nextListId : Nat; var nextTaskId : Nat};
+  stable _taskLists :
+    {
+      var root : Node__46230540<Nat, TaskList__615398063>;
+      var size : Nat__490723111
+    };
+  stable _taskState :
+    {
+      counters : {var nextListId : Nat; var nextTaskId : Nat};
+      taskLists : Map__605269027<Nat, TaskList__565643349>;
+      tasks : Map__605269027<Nat, Task__1024681722>
+    };
+  stable _tasks :
+    {
+      var root : Node__46230540<Nat, Task__431803600>;
+      var size : Nat__490723111
+    };
+  stable _wsState : {var workspace : ?Workspace__405571195};
+  stable _wsUsers :
+    {
+      var root : Node__46230540<Nat, User__802759839>;
+      var size : Nat__490723111
+    }
+};

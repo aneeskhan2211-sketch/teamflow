@@ -1,0 +1,20 @@
+{
+  "overview": "TeamFlow is a unified collaborative workspace with 11 functional modules — Tasks, Documents, Chat, Calendar, Sheets, Notes, Presentations, Projects, People, Activity, and Settings — all sharing a single design system.",
+  "features": [
+    "Internet Identity login with real user accounts",
+    "Inline onboarding flow for new users",
+    "Admin, Member, and Viewer role-based access control",
+    "Role enforcement across all 11 modules",
+    "Protected routes and landing page CTA integration",
+    "Settings for workspace management and member roles"
+  ],
+  "category": "productivity",
+  "tags": [
+    "collaboration",
+    "workspace",
+    "productivity",
+    "project-management",
+    "team"
+  ],
+  "last_updated": "2026-05-27T04:10:55.782Z"
+}

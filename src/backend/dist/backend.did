@@ -1,0 +1,366 @@
+type WorkspaceSettings = 
+ record {
+   description: text;
+   name: text;
+ };
+type Workspace = 
+ record {
+   createdAt: Timestamp;
+   id: nat;
+   memberIds: vec UserId;
+   name: text;
+   ownerId: UserId;
+ };
+type UserSettings = 
+ record {
+   displayName: text;
+   email: text;
+   notificationsEnabled: bool;
+   theme: text;
+ };
+type UserId = nat;
+type User = 
+ record {
+   avatarColor: text;
+   department: text;
+   email: text;
+   id: UserId;
+   name: text;
+   role: variant {
+           admin;
+           guest;
+           member;
+           owner;
+         };
+   title: text;
+ };
+type Timestamp = int;
+type TaskStatus = 
+ variant {
+   blocked;
+   done;
+   inProgress;
+   todo;
+ };
+type TaskPriority = 
+ variant {
+   high;
+   low;
+   normal;
+   urgent;
+ };
+type TaskList = 
+ record {
+   id: nat;
+   isPersonal: bool;
+   name: text;
+   projectId: opt nat;
+   workspaceId: nat;
+ };
+type Task = 
+ record {
+   assigneeIds: vec UserId;
+   createdAt: Timestamp;
+   description: text;
+   dueDate: opt Timestamp;
+   id: nat;
+   listId: nat;
+   priority: TaskPriority;
+   projectId: opt nat;
+   status: TaskStatus;
+   tags: vec text;
+   title: text;
+ };
+type Slide = 
+ record {
+   content: text;
+   id: nat;
+   position: nat;
+   presentationId: nat;
+   title: text;
+   visualType: text;
+ };
+type SheetCell = 
+ record {
+   col: nat;
+   row: nat;
+   sheetId: nat;
+   value: text;
+ };
+type Sheet = 
+ record {
+   createdAt: int;
+   id: nat;
+   name: text;
+   updatedAt: int;
+ };
+type ProjectMilestone = 
+ record {
+   completed: bool;
+   dueDate: opt int;
+   id: nat;
+   projectId: nat;
+   title: text;
+ };
+type Project = 
+ record {
+   color: text;
+   createdAt: int;
+   description: text;
+   id: nat;
+   name: text;
+   ownerId: text;
+   status: text;
+   updatedAt: int;
+ };
+type Presentation = 
+ record {
+   createdAt: int;
+   id: nat;
+   title: text;
+   updatedAt: int;
+ };
+type Person = 
+ record {
+   avatarInitials: text;
+   createdAt: int;
+   department: text;
+   email: text;
+   id: nat;
+   name: text;
+   role: text;
+   status: text;
+ };
+type Notification = 
+ record {
+   body: text;
+   createdAt: Timestamp;
+   id: nat;
+   isRead: bool;
+   notifType: variant {
+                activity;
+                mention;
+                update;
+              };
+   sourceId: opt nat;
+   sourceType: opt text;
+   title: text;
+   userId: UserId;
+ };
+type NoteFolder = 
+ record {
+   createdAt: int;
+   id: nat;
+   name: text;
+ };
+type Note = 
+ record {
+   content: text;
+   createdAt: int;
+   folderId: opt nat;
+   id: nat;
+   title: text;
+   updatedAt: int;
+ };
+type Message = 
+ record {
+   authorId: UserId;
+   channelId: nat;
+   content: text;
+   createdAt: Timestamp;
+   id: nat;
+ };
+type Folder = 
+ record {
+   id: nat;
+   name: text;
+   parentId: opt nat;
+   workspaceId: nat;
+ };
+type Document = 
+ record {
+   authorId: UserId;
+   content: text;
+   createdAt: Timestamp;
+   folderId: opt nat;
+   id: nat;
+   title: text;
+   updatedAt: Timestamp;
+   workspaceId: nat;
+ };
+type DirectMessage = 
+ record {
+   content: text;
+   createdAt: Timestamp;
+   fromUserId: UserId;
+   id: nat;
+   toUserId: UserId;
+ };
+type Channel = 
+ record {
+   createdAt: Timestamp;
+   id: nat;
+   name: text;
+   topic: text;
+   workspaceId: nat;
+ };
+type CalendarEvent = 
+ record {
+   allDay: bool;
+   calendarId: nat;
+   color: text;
+   description: text;
+   endTime: int;
+   id: nat;
+   startTime: int;
+   title: text;
+ };
+type Calendar = 
+ record {
+   color: text;
+   id: nat;
+   name: text;
+   visible: bool;
+ };
+type AuthUser = 
+ record {
+   avatarColor: text;
+   createdAt: opt int;
+   department: text;
+   email: text;
+   id: nat;
+   lastLogin: opt int;
+   name: text;
+   "principal": opt principal;
+   role: variant {
+           admin;
+           guest;
+           member;
+           owner;
+         };
+   title: text;
+ };
+type ActivityEntry = 
+ record {
+   action: text;
+   description: text;
+   id: nat;
+   moduleName: text;
+   timestamp: int;
+   userId: text;
+ };
+service : {
+  addActivity: (module: text, action: text, description: text, userId:
+   text) -> (ActivityEntry);
+  addPerson: (name: text, role: text, email: text, department: text,
+   avatarInitials: text) -> (Person);
+  assignMemberRole: (targetPrincipal: principal, role: text) -> (bool);
+  clearSheetCell: (sheetId: nat, row: nat, col: nat) -> (bool);
+  completeOnboarding: (name: text, workspaceName: text, title: text,
+   department: text, avatarColor: text) -> (AuthUser);
+  createCalendar: (name: text, color: text) -> (Calendar);
+  createCalendarEvent: (title: text, description: text, startTime: int,
+   endTime: int, allDay: bool, color: text, calendarId: nat) ->
+   (CalendarEvent);
+  createChannel: (name: text, topic: text) -> (Channel);
+  createDocument: (title: text, folderId: opt nat) -> (Document);
+  createNote: (title: text, folderId: opt nat) -> (Note);
+  createNoteFolder: (name: text) -> (NoteFolder);
+  createPresentation: (title: text) -> (Presentation);
+  createProject: (name: text, description: text, status: text, color: 
+   text, ownerId: text) -> (Project);
+  createProjectMilestone: (projectId: nat, title: text, dueDate: opt int) ->
+   (ProjectMilestone);
+  createSheet: (name: text) -> (Sheet);
+  createSlide: (presentationId: nat, position: nat, title: text, content:
+   text, visualType: text) -> (Slide);
+  createTask: (title: text, description: text, assigneeIds: vec nat, dueDate:
+   opt int, priority: TaskPriority, status: TaskStatus, listId: nat, tags:
+   vec text, projectId: opt nat) -> (Task);
+  deleteCalendarEvent: (id: nat) -> (bool);
+  deleteNote: (id: nat) -> (bool);
+  deleteNoteFolder: (id: nat) -> (bool);
+  deletePresentation: (id: nat) -> (bool);
+  deleteProject: (id: nat) -> (bool);
+  deleteProjectMilestone: (id: nat) -> (bool);
+  deleteSheet: (id: nat) -> (bool);
+  deleteSlide: (id: nat) -> (bool);
+  generateInviteCode: () -> (text);
+  getActivityFeed: (limit: opt nat) -> (vec ActivityEntry) query;
+  getAllTasks: () -> (vec Task) query;
+  getCalendarEvents: (calendarId: opt nat) -> (vec CalendarEvent) query;
+  getCalendars: () -> (vec Calendar) query;
+  getChannels: () -> (vec Channel) query;
+  getDirectMessages: (userId: nat, withUserId: nat) ->
+   (vec DirectMessage) query;
+  getDocument: (id: nat) -> (opt Document) query;
+  getDocuments: (folderId: opt nat) -> (vec Document) query;
+  getFolders: () -> (vec Folder) query;
+  getMe: () -> (opt AuthUser) query;
+  getMessages: (channelId: nat) -> (vec Message) query;
+  getNote: (id: nat) -> (opt Note) query;
+  getNoteFolders: () -> (vec NoteFolder) query;
+  getNotes: (folderId: opt nat) -> (vec Note) query;
+  getNotifications: (userId: nat) -> (vec Notification) query;
+  getPeople: () -> (vec Person) query;
+  getPerson: (id: nat) -> (opt Person) query;
+  getPresentation: (id: nat) -> (opt Presentation) query;
+  getPresentationSlides: (presentationId: nat) -> (vec Slide) query;
+  getPresentations: () -> (vec Presentation) query;
+  getProject: (id: nat) -> (opt Project) query;
+  getProjectMilestones: (projectId: nat) -> (vec ProjectMilestone) query;
+  getProjects: () -> (vec Project) query;
+  getSheet: (id: nat) -> (opt Sheet) query;
+  getSheetCells: (sheetId: nat) -> (vec SheetCell) query;
+  getSheets: () -> (vec Sheet) query;
+  getTaskLists: () -> (vec TaskList) query;
+  getTasks: (listId: nat) -> (vec Task) query;
+  getUser: (id: nat) -> (opt User) query;
+  getUserSettings: () -> (UserSettings) query;
+  getUsers: () -> (vec User) query;
+  getWorkspace: () -> (opt Workspace) query;
+  getWorkspaceMembers: () -> (vec AuthUser) query;
+  getWorkspaceSettings: () -> (WorkspaceSettings) query;
+  isOnboarded: () -> (bool) query;
+  joinWithInviteCode: (code: text, name: text, avatarColor: text) ->
+   (opt AuthUser);
+  markAllNotificationsRead: (userId: nat) -> (bool);
+  markNotificationRead: (id: nat) -> (bool);
+  registerUser: (name: text, email: text, avatarColor: text) -> (AuthUser);
+  removeMember: (id: nat) -> (bool);
+  removeMemberByPrincipal: (targetPrincipal: principal) -> (bool);
+  renamePresentation: (id: nat, title: text) -> (opt Presentation);
+  renameSheet: (id: nat, name: text) -> (opt Sheet);
+  reorderSlides: (presentationId: nat, orderedIds: vec nat) -> (vec Slide);
+  sendDirectMessage: (fromUserId: nat, toUserId: nat, content: text) ->
+   (DirectMessage);
+  sendMessage: (channelId: nat, content: text, authorId: nat) -> (Message);
+  setSheetCell: (sheetId: nat, row: nat, col: nat, value: text) ->
+   (SheetCell);
+  toggleCalendarVisibility: (id: nat) -> (opt Calendar);
+  toggleProjectMilestone: (id: nat) -> (opt ProjectMilestone);
+  updateCalendarEvent: (id: nat, title: text, description: text, startTime:
+   int, endTime: int, allDay: bool, color: text) -> (opt CalendarEvent);
+  updateDocument: (id: nat, title: text, content: text) -> (opt Document);
+  updateMember: (id: nat, name: text, role: text, email: text, department:
+   text) -> (opt Person);
+  updateMyProfile: (name: text, title: text, department: text, avatarColor:
+   text) -> (bool);
+  updateNote: (id: nat, title: text, content: text) -> (opt Note);
+  updatePersonStatus: (id: nat, status: text) -> (opt Person);
+  updateProject: (id: nat, name: text, description: text, status: text) ->
+   (opt Project);
+  updateProjectMilestone: (id: nat, title: text, dueDate: opt int) ->
+   (opt ProjectMilestone);
+  updateSlide: (id: nat, title: text, content: text, visualType: text) ->
+   (opt Slide);
+  updateTask: (id: nat, title: text, description: text, assigneeIds: 
+   vec nat, dueDate: opt int, priority: TaskPriority, status: TaskStatus,
+   tags: vec text) -> (opt Task);
+  updateTaskStatus: (id: nat, status: TaskStatus) -> (opt Task);
+  updateUserSettings: (displayName: text, email: text, notificationsEnabled:
+   bool, theme: text) -> (UserSettings);
+  updateWorkspaceSettings: (name: text, description: text) ->
+   (WorkspaceSettings);
+  whoAmI: () -> (principal) query;
+}
